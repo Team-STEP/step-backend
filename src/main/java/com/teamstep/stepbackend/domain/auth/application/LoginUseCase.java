@@ -1,40 +1,34 @@
 package com.teamstep.stepbackend.domain.auth.application;
 
+import com.teamstep.stepbackend.domain.auth.entity.Account;
+import com.teamstep.stepbackend.global.tool.JwtManager;
 import leehj050211.bsmOauth.BsmOauth;
 import leehj050211.bsmOauth.dto.resource.BsmUserResource;
-import leehj050211.bsmOauth.exception.BsmOAuthCodeNotFoundException;
-import leehj050211.bsmOauth.exception.BsmOAuthInvalidClientException;
-import leehj050211.bsmOauth.exception.BsmOAuthTokenNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
 public class LoginUseCase {
     private final BsmOauth bsmOauth;
+    private final AuthRepository authRepository;
+    private final JwtManager jwtManager;
 
-    public String oauth(String authCode) {
-        String nickname = "";
-        try {
-            nickname = this.getUserNickname(authCode);
-        } catch (BsmOAuthCodeNotFoundException e) {
-            // 임시 인증코드를 찾을 수 없음
-        } catch (BsmOAuthTokenNotFoundException e) {
-            // 유저 토큰을 찾을 수 없음
-        } catch (BsmOAuthInvalidClientException e) {
-            // 클라이언트 ID 또는 시크릿이 잘못됨
-        } catch (IOException e) {
-            //
-        }
-        return nickname;
+    public String login(String authCode) {
+        BsmUserResource resource = this.getResource(authCode);
+        if (resource == null) return "";
+        Account account = authRepository.findAccountByEmail(resource.getEmail());
+        if (account == null) return "";
+        return jwtManager.createToken(account.getOwnerName());
     }
 
-    private String getUserNickname(String authCode) throws IOException, BsmOAuthInvalidClientException, BsmOAuthCodeNotFoundException, BsmOAuthTokenNotFoundException {
-        String token = bsmOauth.getToken(authCode);
-        BsmUserResource resource = bsmOauth.getResource(token);
-        return resource.getNickname();
+    private BsmUserResource getResource(String authCode) {
+        try {
+            String token = bsmOauth.getToken(authCode);
+            return bsmOauth.getResource(token);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

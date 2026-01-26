@@ -14,7 +14,7 @@ import java.net.URI;
 @RestController
 @RequiredArgsConstructor
 public class AuthController {
-    @Value("${bsm-auth.url}")
+    @Value("${auth.bsm.redirection-url}")
     private String authUrl;
     private final LoginUseCase loginUseCase;
 
@@ -25,9 +25,9 @@ public class AuthController {
                 .build();
     }
 
-    @GetMapping("/auth/oauth/bsm/auth")
+    @GetMapping("/auth/oauth/bsm/login")
     public String oauth(@RequestParam("code") String authCode) {
-        return loginUseCase.oauth(authCode);
+        return loginUseCase.login(authCode);
     }
 
 }
