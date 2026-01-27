@@ -4,9 +4,9 @@ import java.util.List;
 
 public record CompanyListSearchResposneDto(
         Long companyCount,
-        List<CompanySearchReponseDto> companies
+        List<CompanySearchResponseDto> companies
 ) {
-    public static CompanyListSearchResposneDto of(Long companyCount, List<CompanySearchReponseDto> companies) {
+    public static CompanyListSearchResposneDto of(Long companyCount, List<CompanySearchResponseDto> companies) {
         return new CompanyListSearchResposneDto(companyCount, companies);
     }
 }

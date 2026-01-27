@@ -1,7 +1,17 @@
 package com.teamstep.stepbackend.domain.company.adapter;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+// PreAuthorize
+@RestController
+@RequestMapping("/companies")
 public class CompanyController{
+    // Write
+    // Create
+    // Update
+
+    // Read
+    // ListSearch
+    // DetailSearch
 }
