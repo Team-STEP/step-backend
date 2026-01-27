@@ -11,10 +11,10 @@ import lombok.*;
 @Table(name = "companies")
 public class Company {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-    private String companyName;
+    private String id; // 회사 아이디
+    private String companyName; // 회사명
     private String businesspersonCode;
-    private String location;
+    private String location; // 회사 위치
     private String representativeName;
     private String foundationDate;
     private String websiteUrl;

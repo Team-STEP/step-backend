@@ -1,4 +1,4 @@
-package com.teamstep.stepbackend.domain.company.application;
+package com.teamstep.stepbackend.domain.company.application.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
