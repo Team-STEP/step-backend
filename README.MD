@@ -2,8 +2,10 @@
 
 ## CONTRIBUTION CONVENTION
 - 기본 브랜치 구조
-  - main
-  - feature/기능명
+  - main (배포)
+  - dev (테스트, 수정)
+  - feature/기능명 (기능 추가)
+  - fix/수정내용 (수정)
 
 - 기능 추가 및 코드 수정 과정
   1. 기능 생성 시, feature/기능명 브랜치 생성
