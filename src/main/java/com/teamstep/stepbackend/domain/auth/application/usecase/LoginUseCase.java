@@ -25,7 +25,7 @@ public class LoginUseCase {
     private final AuthRepository authRepository;
     private final JwtTool jwtManager;
 
-    @Transactional(readOnly = true, timeout = 2)
+    @Transactional(readOnly = true)
     public String login(
             String authCode
     ) throws AccountNotFoundException, BsmOAuthAuthorizationException, BsmOAuthInvalidClientException, ServerEnvironmentException {
