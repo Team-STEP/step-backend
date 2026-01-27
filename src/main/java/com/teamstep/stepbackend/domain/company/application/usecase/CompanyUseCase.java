@@ -55,12 +55,16 @@ public class CompanyUseCase {
     }
 
     // Write
+    //updateCompany
+    @Transactional
     public void updateCompany(CompanyUpdateRequestDto requestDto){
         Company company = requestDto.toEntity();
         companyRepository.save(company);
         return;
     }
 
+    //createCompany
+    @Transactional
     public CompanyCreateResponseDto createCompany(CompanyCreateRequestDto requestDto) {
         Company company = requestDto.toEntity();
         Company savedCompany = companyRepository.save(company);
