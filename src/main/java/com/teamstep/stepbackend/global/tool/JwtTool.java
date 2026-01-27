@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
-public class JwtManager {
+public class JwtTool {
     @Value("${auth.jwt.secret-key}")
     private String SECRET_KEY;
 
