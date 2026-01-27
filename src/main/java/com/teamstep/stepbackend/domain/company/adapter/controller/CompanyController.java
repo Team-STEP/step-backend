@@ -21,7 +21,7 @@ public class CompanyController{
     private final UpdateCompanyUseCase updateCompanyUseCase;
 
     // Write
-    @PostMapping("/companies")
+    @PostMapping("")
     public ResponseEntity<CompanyCreateResponseDto> createCompany(
             @Valid @RequestBody CompanyCreateRequestDto requestDto
     ) {
@@ -29,11 +29,12 @@ public class CompanyController{
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PostMapping("/companies/{company-id}")
-    public void updateCompany(
-            @Valid @RequestParam String id, @RequestBody CompanyUpdateRequestDto requestDto
+    @PostMapping("/{id}")
+    public ResponseEntity<Void> updateCompany(
+            @Valid @PathVariable("id") String id, @RequestBody CompanyUpdateRequestDto requestDto
     ){
         updateCompanyUseCase.updateCompany(id, requestDto);
+        return ResponseEntity.ok().build();
     }
 
     // Read
