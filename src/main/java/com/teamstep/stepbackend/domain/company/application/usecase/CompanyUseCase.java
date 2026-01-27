@@ -57,10 +57,11 @@ public class CompanyUseCase {
     // Write
     //updateCompany
     @Transactional
-    public void updateCompany(CompanyUpdateRequestDto requestDto){
-        Company company = requestDto.toEntity();
+    public void updateCompany(String id, CompanyUpdateRequestDto requestDto){
+        companyRepository.findById(id)
+                .orElseThrow(() -> new CompanyNotFoundException("해당 회사가 존재하지 않습니다."));
+        Company company = requestDto.toEntity(id);
         companyRepository.save(company);
-        return;
     }
 
     //createCompany
