@@ -14,7 +14,7 @@ import java.util.Date;
 public class JwtTool {
     @Value("${auth.jwt.secret-key}")
     private String SECRET_KEY;
-    @Value("${auth.jwt.expiry-period")
+    @Value("${auth.jwt.expiry-period}")
     private Integer expiryPeriod;
 
     public String createToken(Account account) {
