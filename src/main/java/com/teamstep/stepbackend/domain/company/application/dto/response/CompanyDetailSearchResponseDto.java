@@ -23,6 +23,7 @@ public record CompanyDetailSearchResponseDto(
         String managerPhoneNumber,
         String managerCellPhoneNumber,
         String managerEmail
+        //공고 들어갈자리
 ) {
     public static CompanyDetailSearchResponseDto from(Company company) {
         return new CompanyDetailSearchResponseDto(
@@ -46,6 +47,7 @@ public record CompanyDetailSearchResponseDto(
                 company.getManagerPhoneNumber(),
                 company.getManagerCellPhoneNumber(),
                 company.getManagerEmail()
+                //공고 들어갈자리
                 );
     }
 }
