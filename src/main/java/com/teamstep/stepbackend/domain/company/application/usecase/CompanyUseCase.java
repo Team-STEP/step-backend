@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CompanyUseCase {
@@ -30,8 +32,31 @@ public class CompanyUseCase {
     }
     // GetCompanyList
     @Transactional(readOnly = true)
-    public CompanyListSearchResposneDto getCompanyList(CompanySearchResponseDto) {
-
+    public CompanyListSearchResposneDto getCompanyList(CompanySearchResponseDto filter) {
+        List<Company> companies = List.of();
+        if (filter.companyName().isBlank()) {
+            if (filter.area().isBlank()) {
+                companies = companyRepository.findByLocation(filter.location());
+            }else {
+                if (filter.location().isBlank()) {
+                    
+                }else  {
+                    companies = companyRepository.findByLocationAndArea(filter.location(), filter.area());
+                }
+            }
+        }else {
+            if (filter.area().isBlank()) {
+                if (filter.location().isBlank()) {
+                    companies = companyRepository.findByCompanyName(filter.companyName());
+                }else {
+                    companies = companyRepository.findByCompanyNameAndLocation(filter.companyName(), filter.location());
+                }
+            }else {
+                companies = companyRepository.findByCompanyNameAndLocationAndArea(filter.companyName(),  filter.location(), filter.area());
+            }
+        }
+        List<CompanySearchResponseDto> companyDtoList = companies.stream().map(CompanySearchResponseDto::from).toList();
+        return CompanyListSearchResposneDto.of(Long.valueOf(companyDtoList.size()), companyDtoList);
     }
 
     // Write
