@@ -32,7 +32,7 @@ public class LoginUseCase {
         String email = this.getEmailFromBsm(authCode);
         Optional<Account> account = authRepository.findAccountByEmail(email);
         if (account.isEmpty()) throw new AccountNotFoundException();
-        return jwtManager.createToken(account.get().getOwnerName());
+        return jwtManager.createToken(account.get());
     }
 
     private String getEmailFromBsm(
