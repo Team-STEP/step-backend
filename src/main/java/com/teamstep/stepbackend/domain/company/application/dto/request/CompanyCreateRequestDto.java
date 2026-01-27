@@ -1,6 +1,6 @@
 package com.teamstep.stepbackend.domain.company.application.dto.request;
 
-public record CompanyCreateDto(
+public record CompanyCreateRequestDto(
         String companyName,
         String businesspersonCode,
         String location,
