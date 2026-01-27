@@ -34,7 +34,7 @@ public class CompanyUseCase {
     // GetCompanyList
     @Transactional(readOnly = true)
     public CompanyListSearchResposneDto getCompanyList(CompanySearchResponseDto filter) {
-        Specification<Company> spec = Specification.where((Specification<Company>) null);
+        Specification<Company> spec = (root, query, criteriaBuilder) -> criteriaBuilder.conjunction();
 
         if (filter.companyName() != null && !filter.companyName().isBlank()) {
             spec = spec.and(((root, query, criteriaBuilder) ->
