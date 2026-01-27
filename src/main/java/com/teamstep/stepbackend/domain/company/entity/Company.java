@@ -24,7 +24,6 @@ public class Company {
     private String description; //주요 사업 내용
     private String capital; //자본금
     private String annualSales; //연매출액
-    private Long totalEmployee; //총직원수
     private Long maleEmployee; //남성 직원수
     private Long femaleEmployee; //여성 직원수
     private String managerDepartment; //채용담당자 부서
