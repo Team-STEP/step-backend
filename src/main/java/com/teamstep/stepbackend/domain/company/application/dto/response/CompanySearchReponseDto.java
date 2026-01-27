@@ -1,4 +1,4 @@
-package com.teamstep.stepbackend.domain.company.application.dto;
+package com.teamstep.stepbackend.domain.company.application.dto.response;
 
 import com.teamstep.stepbackend.domain.company.entity.Company;
 

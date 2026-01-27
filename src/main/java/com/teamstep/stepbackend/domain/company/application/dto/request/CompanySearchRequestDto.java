@@ -1,4 +1,4 @@
-package com.teamstep.stepbackend.domain.company.application.dto;
+package com.teamstep.stepbackend.domain.company.application.dto.request;
 
 public record CompanySearchRequestDto(
         String companyName,
