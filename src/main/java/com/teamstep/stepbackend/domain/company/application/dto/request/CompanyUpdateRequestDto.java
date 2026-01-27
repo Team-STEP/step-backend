@@ -3,12 +3,11 @@ package com.teamstep.stepbackend.domain.company.application.dto.request;
 import com.teamstep.stepbackend.domain.company.application.dto.response.CompanySearchResponseDto;
 import com.teamstep.stepbackend.domain.company.entity.Company;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
 public record CompanyUpdateRequestDto(
-        @NotBlank(message = "회사명은 공백이 안됨")
-        String id,
         @NotBlank(message = "회사명은 공백이 안됨")
         String companyName,
         @NotBlank(message = "사업자 번호는 공백이 안됨")
@@ -31,9 +30,9 @@ public record CompanyUpdateRequestDto(
         String capital,
         @NotBlank(message = "연매출액은 공백이 안됨")
         String annualSales,
-        @NotBlank(message = "남성 직원수는 공백이 안됨")
+        @NotNull(message = "남성 직원수는 공백이 안됨")
         Long maleEmployee,
-        @NotBlank(message = "여성 직원수는 공백이 안됨")
+        @NotNull(message = "여성 직원수는 공백이 안됨")
         Long femaleEmployee,
         @NotBlank(message = "채용담당자 부서는 공백이 안됨")
         String managerDepartment,
@@ -50,9 +49,9 @@ public record CompanyUpdateRequestDto(
         @NotBlank(message = "채용담당자 이메일은 공백이 안됨")
         String managerEmail
 ) {
-    public Company toEntity(){
+    public Company toEntity(String id){
         return Company.builder()
-                .id(this.id)
+                .id(id)
                 .companyName(this.companyName)
                 .businesspersonCode(this.businesspersonCode)
                 .location(this.location)

@@ -2,6 +2,7 @@ package com.teamstep.stepbackend.domain.company.application.dto.request;
 
 import com.teamstep.stepbackend.domain.company.entity.Company;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record CompanyCreateRequestDto(
         @NotBlank(message = "회사명은 공백이 안됨")
@@ -26,9 +27,9 @@ public record CompanyCreateRequestDto(
         String capital,
         @NotBlank(message = "연매출액은 공백이 안됨")
         String annualSales,
-        @NotBlank(message = "남성 직원수는 공백이 안됨")
+        @NotNull(message = "남성 직원수는 공백이 안됨")
         Long maleEmployee,
-        @NotBlank(message = "여성 직원수는 공백이 안됨")
+        @NotNull(message = "여성 직원수는 공백이 안됨")
         Long femaleEmployee,
         @NotBlank(message = "채용담당자 부서는 공백이 안됨")
         String managerDepartment,
