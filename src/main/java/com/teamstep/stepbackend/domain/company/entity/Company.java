@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Table(name = "companies")
 public class Company {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private String id; // 회사 아이디
     private String companyName; // 회사명
     private String businesspersonCode; //사업자 번호
