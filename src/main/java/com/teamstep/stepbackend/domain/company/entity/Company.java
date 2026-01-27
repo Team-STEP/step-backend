@@ -13,25 +13,25 @@ public class Company {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id; // 회사 아이디
     private String companyName; // 회사명
-    private String businesspersonCode;
+    private String businesspersonCode; //사업자 번호
     private String location; // 회사 위치
-    private String representativeName;
-    private String foundationDate;
-    private String websiteUrl;
-    private String type;
-    private String area;
+    private String representativeName; //대표자명
+    private String foundationDate; //설립 일자
+    private String websiteUrl; //웹사이트 url
+    private String type; //업태
+    private String area; //종목
     @Column(columnDefinition = "TEXT")
-    private String description;
-    private String capital;
-    private String annualSales;
-    private Long totalEmployee;
-    private Long maleEmployee;
-    private Long femaleEmployee;
-    private String managerDepartment;
-    private String managerPosition;
-    private String managerName;
-    private String managerFax;
-    private String managerPhoneNumber;
-    private String managerCellPhoneNumber;
-    private String managerEmail;
+    private String description; //주요 사업 내용
+    private String capital; //자본금
+    private String annualSales; //연매출액
+    private Long totalEmployee; //총직원수
+    private Long maleEmployee; //남성 직원수
+    private Long femaleEmployee; //여성 직원수
+    private String managerDepartment; //채용담당자 부서
+    private String managerPosition; //채용담당자 직책
+    private String managerName; //채용담당자 성명
+    private String managerFax; //채용담당자 팩스
+    private String managerPhoneNumber; //채용담당자 전화기 번호
+    private String managerCellPhoneNumber; //채용담당자 휴대폰 번호
+    private String managerEmail; //채용담당자 이메일
 }
