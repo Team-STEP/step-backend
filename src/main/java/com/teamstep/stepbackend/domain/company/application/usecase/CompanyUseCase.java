@@ -10,6 +10,7 @@ import com.teamstep.stepbackend.domain.company.application.exception.CompanyNotF
 import com.teamstep.stepbackend.domain.company.application.repository.CompanyRepository;
 import com.teamstep.stepbackend.domain.company.entity.Company;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,28 +34,22 @@ public class CompanyUseCase {
     // GetCompanyList
     @Transactional(readOnly = true)
     public CompanyListSearchResposneDto getCompanyList(CompanySearchResponseDto filter) {
-        List<Company> companies = List.of();
-        if (filter.companyName().isBlank()) {
-            if (filter.area().isBlank()) {
-                companies = companyRepository.findByLocation(filter.location());
-            }else {
-                if (filter.location().isBlank()) {
-                    
-                }else  {
-                    companies = companyRepository.findByLocationAndArea(filter.location(), filter.area());
-                }
-            }
-        }else {
-            if (filter.area().isBlank()) {
-                if (filter.location().isBlank()) {
-                    companies = companyRepository.findByCompanyName(filter.companyName());
-                }else {
-                    companies = companyRepository.findByCompanyNameAndLocation(filter.companyName(), filter.location());
-                }
-            }else {
-                companies = companyRepository.findByCompanyNameAndLocationAndArea(filter.companyName(),  filter.location(), filter.area());
-            }
+        Specification<Company> spec = Specification.where((Specification<Company>) null);
+
+        if (filter.companyName() != null && !filter.companyName().isBlank()) {
+            spec = spec.and(((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(root.get("companyName").as(String.class), "%" + filter.companyName() + "%")));
         }
+        if (filter.location() != null && !filter.location().isBlank()) {
+            spec = spec.and(((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("location"), filter.location())));
+        }
+        if (filter.area() != null && !filter.area().isBlank()) {
+            spec = spec.and(((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("area"), filter.area())));
+        }
+
+        List<Company> companies = companyRepository.findAll(spec);
         List<CompanySearchResponseDto> companyDtoList = companies.stream().map(CompanySearchResponseDto::from).toList();
         return CompanyListSearchResposneDto.of(Long.valueOf(companyDtoList.size()), companyDtoList);
     }
