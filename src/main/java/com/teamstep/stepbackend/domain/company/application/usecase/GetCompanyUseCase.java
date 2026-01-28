@@ -4,6 +4,7 @@ import com.teamstep.stepbackend.domain.company.application.dto.response.CompanyD
 import com.teamstep.stepbackend.domain.company.application.exception.CompanyNotFoundException;
 import com.teamstep.stepbackend.domain.company.application.repository.CompanyRepository;
 import com.teamstep.stepbackend.domain.company.entity.Company;
+import com.teamstep.stepbackend.domain.recruitment.application.repository.RecruitmentRepository;
 import com.teamstep.stepbackend.domain.recruitment.entity.Recruitment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.List;
 public class GetCompanyUseCase {
 
     private final CompanyRepository companyRepository;
+    private final RecruitmentRepository recruitmentRepository;
 
     // Read
     // GetCompany
@@ -25,7 +27,7 @@ public class GetCompanyUseCase {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new CompanyNotFoundException("해당 회사가 존재하지 않습니다."));
 
-        Recruitment recruitment = companyRepository.findByCompanyId(companyId);
+        List<Recruitment> recruitment = recruitmentRepository.findByCompany(companyId);
 
         return CompanyDetailSearchResponseDto.of(company, recruitment);
     }
