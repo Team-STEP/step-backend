@@ -13,17 +13,14 @@ public record RecruitmentSearchResponseDto(
         String jobType,
         List<CompanySummaryDto> companies
 ) {
-    public static RecruitmentSearchResponseDto of(Long recruitmentCount, Recruitment recruitment, List<Company> companyList){
-        List<CompanySummaryDto> companies = companyList.stream()
-                .map(CompanySummaryDto::from)
-                .toList();
+    public static RecruitmentSearchResponseDto of(Long recruitmentCount, Recruitment recruitment, List<CompanySummaryDto> companyList){
         return new RecruitmentSearchResponseDto(
                 recruitment.getRecruitmentId(),
                 recruitmentCount,
                 recruitment.getJobDescription(),
                 recruitment.getMajor(),
                 recruitment.getJobType(),
-                companies
+                companyList
         );
     }
 }
