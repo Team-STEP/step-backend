@@ -1,6 +1,7 @@
 package com.teamstep.stepbackend.domain.company.application.usecase;
 
 import com.teamstep.stepbackend.domain.company.application.dto.response.CompanyDetailSearchResponseDto;
+import com.teamstep.stepbackend.domain.company.application.dto.response.RecruitmentSummaryDto;
 import com.teamstep.stepbackend.domain.company.application.exception.CompanyNotFoundException;
 import com.teamstep.stepbackend.domain.company.application.repository.CompanyRepository;
 import com.teamstep.stepbackend.domain.company.entity.Company;
@@ -27,8 +28,11 @@ public class GetCompanyUseCase {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new CompanyNotFoundException("해당 회사가 존재하지 않습니다."));
 
-        List<Recruitment> recruitment = recruitmentRepository.findByCompany(companyId);
+        List<Recruitment> recruitmentList = recruitmentRepository.findByCompany(companyId);
+        List<RecruitmentSummaryDto> recruitments = recruitmentList.stream()
+                .map(RecruitmentSummaryDto::from)
+                .toList();
 
-        return CompanyDetailSearchResponseDto.of(company, recruitment);
+        return CompanyDetailSearchResponseDto.of(company, recruitments);
     }
 }

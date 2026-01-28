@@ -1,7 +1,6 @@
 package com.teamstep.stepbackend.domain.company.application.dto.response;
 
 import com.teamstep.stepbackend.domain.company.entity.Company;
-import com.teamstep.stepbackend.domain.recruitment.entity.Recruitment;
 
 import java.util.List;
 
@@ -28,10 +27,7 @@ public record CompanyDetailSearchResponseDto(
         String managerEmail,
         List<RecruitmentSummaryDto> recruitments
 ) {
-    public static CompanyDetailSearchResponseDto of(Company company, List<Recruitment> recruitmentList) {
-        List<RecruitmentSummaryDto> recruitments = recruitmentList.stream()
-                .map(RecruitmentSummaryDto::from)
-                .toList();
+    public static CompanyDetailSearchResponseDto of(Company company, List<RecruitmentSummaryDto> recruitments) {
         return new CompanyDetailSearchResponseDto(
                 company.getCompanyId(),
                 company.getBusinesspersonCode(),
