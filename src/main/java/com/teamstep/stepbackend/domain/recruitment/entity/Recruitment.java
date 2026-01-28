@@ -1,9 +1,7 @@
 package com.teamstep.stepbackend.domain.recruitment.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.teamstep.stepbackend.domain.company.entity.Company;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -14,7 +12,12 @@ import lombok.*;
 @Table(name = "recruitments")
 public class Recruitment {
     @Id
-    private String id; //회사 Id
+    @Column(name = "recruitment_id")
+    private String recruitmentId; //공고 Id
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company; //DB 외래키
 
     @Column(name = "preferred_qualifications")
     private String preferredQualifications; //우대자격
