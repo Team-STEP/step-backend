@@ -68,7 +68,7 @@ public record RecruitmentUpdateRequestDto(
 ) {
     public Recruitment toEntity(String id) {
         return Recruitment.builder()
-                .id(id)
+                .recruitmentId(id)
                 .preferredQualifications(this.preferredQualifications)
                 .otherRequirement(this.otherRequirement)
                 .documentResume(this.documentResume)
