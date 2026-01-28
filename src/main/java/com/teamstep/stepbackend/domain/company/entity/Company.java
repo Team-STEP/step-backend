@@ -11,7 +11,8 @@ import lombok.*;
 @Table(name = "companies")
 public class Company {
     @Id
-    private String id; // 회사 아이디
+    @Column(name = "company_id")
+    private String companyId; // 회사 아이디
 
     @Column(name = "company_name")
     private String companyName; // 회사명
