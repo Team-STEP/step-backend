@@ -10,5 +10,4 @@ import java.util.List;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, String>, JpaSpecificationExecutor<Company> {
-    Recruitment findByCompanyId(String companyId);
 }
