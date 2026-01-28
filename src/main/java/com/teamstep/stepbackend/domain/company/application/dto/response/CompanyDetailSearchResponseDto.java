@@ -1,9 +1,10 @@
 package com.teamstep.stepbackend.domain.company.application.dto.response;
 
 import com.teamstep.stepbackend.domain.company.entity.Company;
+import com.teamstep.stepbackend.domain.recruitment.entity.Recruitment;
 
 public record CompanyDetailSearchResponseDto(
-        String id,
+        String companyId,
         String businesspersonCode,
         String location,
         String representativeName,
@@ -22,12 +23,14 @@ public record CompanyDetailSearchResponseDto(
         String managerFax,
         String managerPhoneNumber,
         String managerCellPhoneNumber,
-        String managerEmail
-        //공고 들어갈자리
+        String managerEmail,
+        String recruitmentId,
+        String startDate,
+        String endDate
 ) {
-    public static CompanyDetailSearchResponseDto from(Company company) {
+    public static CompanyDetailSearchResponseDto of(Company company, Recruitment recruitment) {
         return new CompanyDetailSearchResponseDto(
-                company.getId(),
+                company.getCompanyId(),
                 company.getBusinesspersonCode(),
                 company.getLocation(),
                 company.getRepresentativeName(),
@@ -46,8 +49,10 @@ public record CompanyDetailSearchResponseDto(
                 company.getManagerFax(),
                 company.getManagerPhoneNumber(),
                 company.getManagerCellPhoneNumber(),
-                company.getManagerEmail()
-                //공고 들어갈자리
+                company.getManagerEmail(),
+                recruitment.getRecruitmentId(),
+                recruitment.getStartDate(),
+                recruitment.getEndDate()
                 );
     }
 }
