@@ -4,9 +4,12 @@ import com.teamstep.stepbackend.domain.company.application.dto.response.CompanyD
 import com.teamstep.stepbackend.domain.company.application.exception.CompanyNotFoundException;
 import com.teamstep.stepbackend.domain.company.application.repository.CompanyRepository;
 import com.teamstep.stepbackend.domain.company.entity.Company;
+import com.teamstep.stepbackend.domain.recruitment.entity.Recruitment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -22,6 +25,8 @@ public class GetCompanyUseCase {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new CompanyNotFoundException("해당 회사가 존재하지 않습니다."));
 
-        return CompanyDetailSearchResponseDto.from(company);
+        Recruitment recruitment = companyRepository.findByCompanyId(companyId);
+
+        return CompanyDetailSearchResponseDto.of(company, recruitment);
     }
 }
