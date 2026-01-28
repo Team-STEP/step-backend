@@ -9,7 +9,7 @@ public record CompanySearchResponseDto(
     String managerDepartment,
     String managerPosition,
     String managerName,
-    String id
+    String companyId
 ) {
     public static CompanySearchResponseDto from(Company company) {
         return new CompanySearchResponseDto(
@@ -19,7 +19,7 @@ public record CompanySearchResponseDto(
                 company.getManagerDepartment(),
                 company.getManagerPosition(),
                 company.getManagerName(),
-                company.getId()
+                company.getCompanyId()
         );
     }
 }
