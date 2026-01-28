@@ -10,17 +10,17 @@ public record RecruitmentUpdateRequestDto(
         @NotBlank(message = "기타 요구사항은 공백이 안됨")
         String otherRequirement,
         @NotNull(message = "이력서는 공백이 안됨")
-        boolean documentResume,
+        Boolean documentResume,
         @NotNull(message = "자소서는 공백이 안됨")
-        boolean documentIntroduction,
+        Boolean documentIntroduction,
         @NotNull(message = "생기부는 공백이 안됨")
-        boolean documentStudentRecord,
+        Boolean documentStudentRecord,
         @NotBlank(message = "기타는 공백이 안됨")
         String documentOther,
         @NotNull(message = "남성 모집인원은 공백이 안됨")
-        int targetMale,
+        Long targetMale,
         @NotNull(message = "여성 모집인원은 공백이 안됨")
-        int targetFemale,
+        Long targetFemale,
         @NotBlank(message = "학과는 공백이 안됨")
         String major,
         @NotBlank(message = "모집 직종은 공백이 안됨")

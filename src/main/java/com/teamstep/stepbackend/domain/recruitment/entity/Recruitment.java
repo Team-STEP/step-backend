@@ -27,23 +27,23 @@ public class Recruitment {
 
     //필요 서류 관련
     @Column(name = "document_resume")
-    private boolean documentResume; //이력서
+    private Boolean documentResume; //이력서
 
     @Column(name = "document_introduction")
-    private boolean documentIntroduction; //자소서
+    private Boolean documentIntroduction; //자소서
 
     @Column(name = "document_student_record")
-    private boolean documentStudentRecord; //생기부
+    private Boolean documentStudentRecord; //생기부
 
     @Column(name = "document_other")
     private String documentOther; //기타
 
     //모집 인원 관련
     @Column(name = "target_male")
-    private int targetMale; //남성 모집인원
+    private Long targetMale; //남성 모집인원
 
     @Column(name = "target_female")
-    private int targetFemale; //여성 모집인원
+    private Long targetFemale; //여성 모집인원
 
     //모집 희망 학과 관련
     private String major; //학과
