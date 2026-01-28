@@ -3,6 +3,8 @@ package com.teamstep.stepbackend.domain.company.application.dto.response;
 import com.teamstep.stepbackend.domain.company.entity.Company;
 import com.teamstep.stepbackend.domain.recruitment.entity.Recruitment;
 
+import java.util.List;
+
 public record CompanyDetailSearchResponseDto(
         String companyId,
         String businesspersonCode,
@@ -24,11 +26,12 @@ public record CompanyDetailSearchResponseDto(
         String managerPhoneNumber,
         String managerCellPhoneNumber,
         String managerEmail,
-        String recruitmentId,
-        String startDate,
-        String endDate
+        List<RecruitmentSummaryDto> recruitments
 ) {
-    public static CompanyDetailSearchResponseDto of(Company company, Recruitment recruitment) {
+    public static CompanyDetailSearchResponseDto of(Company company, List<Recruitment> recruitmentList) {
+        List<RecruitmentSummaryDto> recruitments = recruitmentList.stream()
+                .map(RecruitmentSummaryDto::from)
+                .toList();
         return new CompanyDetailSearchResponseDto(
                 company.getCompanyId(),
                 company.getBusinesspersonCode(),
@@ -50,9 +53,7 @@ public record CompanyDetailSearchResponseDto(
                 company.getManagerPhoneNumber(),
                 company.getManagerCellPhoneNumber(),
                 company.getManagerEmail(),
-                recruitment.getRecruitmentId(),
-                recruitment.getStartDate(),
-                recruitment.getEndDate()
+                recruitments
                 );
     }
 }
