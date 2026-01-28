@@ -54,6 +54,6 @@ public record CompanyDetailSearchResponseDto(
                 company.getManagerCellPhoneNumber(),
                 company.getManagerEmail(),
                 recruitments
-                );
+        );
     }
 }
