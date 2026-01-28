@@ -51,7 +51,7 @@ public record CompanyUpdateRequestDto(
 ) {
     public Company toEntity(String id){
         return Company.builder()
-                .id(id)
+                .companyId(id)
                 .companyName(this.companyName)
                 .businesspersonCode(this.businesspersonCode)
                 .location(this.location)
