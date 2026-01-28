@@ -13,5 +13,4 @@ import java.util.List;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, String>, JpaSpecificationExecutor<Company> {
-    Page<Company> findAll(Specification<Company> spec, Pageable pageable);
 }
