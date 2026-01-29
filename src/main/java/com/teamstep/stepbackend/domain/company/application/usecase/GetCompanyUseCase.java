@@ -1,7 +1,8 @@
 package com.teamstep.stepbackend.domain.company.application.usecase;
 
+import com.teamstep.stepbackend.domain.company.application.dto.request.CompanyDetailSearchRequestDto;
 import com.teamstep.stepbackend.domain.company.application.dto.response.CompanyDetailSearchResponseDto;
-import com.teamstep.stepbackend.domain.company.application.dto.response.RecruitmentSummaryDto;
+import com.teamstep.stepbackend.domain.recruitment.application.dto.response.RecruitmentSummaryDto;
 import com.teamstep.stepbackend.domain.company.application.exception.CompanyNotFoundException;
 import com.teamstep.stepbackend.domain.company.application.repository.CompanyRepository;
 import com.teamstep.stepbackend.domain.company.entity.Company;
@@ -21,14 +22,12 @@ public class GetCompanyUseCase {
     private final CompanyRepository companyRepository;
     private final RecruitmentRepository recruitmentRepository;
 
-    // Read
-    // GetCompany
     @Transactional(readOnly = true)
-    public CompanyDetailSearchResponseDto getCompanyById(String companyId) {
-        Company company = companyRepository.findById(companyId)
+    public CompanyDetailSearchResponseDto getCompanyById(CompanyDetailSearchRequestDto companyId) {
+        Company company = companyRepository.findById(companyId.id())
                 .orElseThrow(() -> new CompanyNotFoundException("해당 회사가 존재하지 않습니다."));
 
-        List<Recruitment> recruitmentList = recruitmentRepository.findByCompany(companyId);
+        List<Recruitment> recruitmentList = recruitmentRepository.findByCompany(companyId.id());
         List<RecruitmentSummaryDto> recruitments = recruitmentList.stream()
                 .map(RecruitmentSummaryDto::from)
                 .toList();

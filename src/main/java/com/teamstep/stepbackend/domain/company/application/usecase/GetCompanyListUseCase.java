@@ -1,7 +1,7 @@
 package com.teamstep.stepbackend.domain.company.application.usecase;
 
 import com.teamstep.stepbackend.domain.company.application.dto.request.CompanySearchRequestDto;
-import com.teamstep.stepbackend.domain.company.application.dto.response.CompanyListSearchResposneDto;
+import com.teamstep.stepbackend.domain.company.application.dto.response.CompanyListSearchResponseDto;
 import com.teamstep.stepbackend.domain.company.application.dto.response.CompanySearchResponseDto;
 import com.teamstep.stepbackend.domain.company.application.repository.CompanyRepository;
 import com.teamstep.stepbackend.domain.company.entity.Company;
@@ -21,27 +21,27 @@ public class GetCompanyListUseCase {
     private final CompanyRepository companyRepository;
 
     @Transactional(readOnly = true)
-    public CompanyListSearchResposneDto getCompanyList(
+    public CompanyListSearchResponseDto getCompanyList(
             CompanySearchRequestDto filter,
             Pageable pageable
     ) {
         Specification<Company> spec = (root, query, criteriaBuilder) -> criteriaBuilder.conjunction();
 
         if (filter.companyName() != null && !filter.companyName().isBlank()) {
-            spec = spec.and(((root, query, criteriaBuilder) ->
-                    criteriaBuilder.like(root.get("companyName").as(String.class), "%" + filter.companyName() + "%")));
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.like(root.get("companyName").as(String.class), "%" + filter.companyName() + "%"));
         }
         if (filter.location() != null && !filter.location().isBlank()) {
-            spec = spec.and(((root, query, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("location"), filter.location())));
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("location"), filter.location()));
         }
         if (filter.area() != null && !filter.area().isBlank()) {
-            spec = spec.and(((root, query, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("area"), filter.area())));
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("area"), filter.area()));
         }
 
         Page<Company> companyPage = companyRepository.findAll(spec, pageable);
         List<CompanySearchResponseDto> companyDtoList = companyPage.getContent().stream().map(CompanySearchResponseDto::from).toList();
-        return CompanyListSearchResposneDto.of(companyPage.getTotalElements(), companyDtoList);
+        return CompanyListSearchResponseDto.of(companyPage.getTotalElements(), companyDtoList);
     }
 }
