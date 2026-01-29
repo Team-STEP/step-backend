@@ -1,11 +1,13 @@
 package com.teamstep.stepbackend.domain.recruitment.adapter.controller;
 
 import com.teamstep.stepbackend.domain.recruitment.application.dto.request.RecruitmentCreateRequestDto;
+import com.teamstep.stepbackend.domain.recruitment.application.dto.request.RecruitmentDetailSearchRequestDto;
+import com.teamstep.stepbackend.domain.recruitment.application.dto.request.RecruitmentListSearchRequestDto;
 import com.teamstep.stepbackend.domain.recruitment.application.dto.request.RecruitmentUpdateRequestDto;
 import com.teamstep.stepbackend.domain.recruitment.application.dto.response.RecruitmentCreateResponseDto;
-import com.teamstep.stepbackend.domain.recruitment.application.usecase.CreateRecruitmentUseCase;
-import com.teamstep.stepbackend.domain.recruitment.application.usecase.DeleteRecruitmentUseCase;
-import com.teamstep.stepbackend.domain.recruitment.application.usecase.UpdateRecruitmentUseCase;
+import com.teamstep.stepbackend.domain.recruitment.application.dto.response.RecruitmentDetailSearchResponseDto;
+import com.teamstep.stepbackend.domain.recruitment.application.dto.response.RecruitmentListSearchResponseDto;
+import com.teamstep.stepbackend.domain.recruitment.application.usecase.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,8 +22,9 @@ public class RecruitmentController {
     private final CreateRecruitmentUseCase createRecruitmentUseCase;
     private final UpdateRecruitmentUseCase updateRecruitmentUseCase;
     private final DeleteRecruitmentUseCase deleteRecruitmentUseCase;
+    private final GetRecruitmentListUseCase getRecruitmentListUseCase;
+    private final GetRecruitmentUseCase getRecruitmentUseCase;
 
-    // Write
     // Create
     @PostMapping
     public ResponseEntity<RecruitmentCreateResponseDto> createRecruitment(
@@ -34,22 +37,35 @@ public class RecruitmentController {
     // Update
     @PutMapping("/{recruitmentId}")
     public ResponseEntity<Void> updateRecruitment(
-            @Valid @PathVariable("recruitmentId") String id, @RequestBody RecruitmentUpdateRequestDto requestDto
+            @PathVariable String recruitmentId, @Valid @RequestBody RecruitmentUpdateRequestDto requestDto
     ){
-        updateRecruitmentUseCase.updateRecruitment(id, requestDto);
+        updateRecruitmentUseCase.updateRecruitment(recruitmentId, requestDto);
         return ResponseEntity.ok().build();
     }
+
     // Delete
     @DeleteMapping("/{recruitmentId}")
     public ResponseEntity<Void> deleteRecruitment(
-            @PathVariable("recruitmentId") String id
+            @PathVariable String recruitmentId
     ){
-        deleteRecruitmentUseCase.deleteRecruitment(id);
+        deleteRecruitmentUseCase.deleteRecruitment(recruitmentId);
         return ResponseEntity.noContent().build();
     }
 
-
-    // Read
     // ListSearch
+    @GetMapping
+    public ResponseEntity<RecruitmentListSearchResponseDto> getRecruitmentList(
+            @ModelAttribute RecruitmentListSearchRequestDto requestDto
+    ) {
+        return ResponseEntity.ok(getRecruitmentListUseCase.getRecruitmentList(requestDto));
+    }
+
     // DetailSearch
+    @GetMapping("/{recruitmentId}")
+    public ResponseEntity<RecruitmentDetailSearchResponseDto> getRecruitmentDetail(
+            @PathVariable String recruitmentId
+    ) {
+        RecruitmentDetailSearchRequestDto requestDto = new RecruitmentDetailSearchRequestDto(recruitmentId);
+        return ResponseEntity.ok(getRecruitmentUseCase.getRecruitment(requestDto));
+    }
 }
