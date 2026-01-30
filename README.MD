@@ -1,16 +1,18 @@
 # STEP BACKEND
 
 ## CONTRIBUTION CONVENTION
-- 기본 브랜치 구조
-  - main (배포)
-  - dev (테스트, 수정)
-  - feature/기능명 (기능 추가)
-  - fix/수정내용 (수정)
+### 기본 브랜치 구조
+- main (배포)
+- dev (개발 및 테스트)
+- feature/기능명 (기능 추가)
+- fix/수정내용 (수정)
 
-- 기능 추가 및 코드 수정 과정
-  1. 기능 생성 시, feature/기능명 브랜치 생성
-  2. 기능 작성 이후 main 브랜치로 PR
-  3. PR 검토 이후 merge
+### 개발 프로세스
+1. main -> dev 브랜치 생성
+2. dev -> 하위 브랜치 생성
+3. 하위 브랜치에서 개발 수행
+4. 하위 브랜치를 dev에 merge 이후 테스트
+5. dev -> main PR 생성 후 병합
 
 ## COMMIT CONVENTION
 | Type     | Description |
