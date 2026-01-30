@@ -1,0 +1,37 @@
+package com.teamstep.stepbackend.domain.company.application.usecase;
+
+import com.teamstep.stepbackend.domain.company.application.dto.request.CompanyDetailSearchRequestDto;
+import com.teamstep.stepbackend.domain.company.application.dto.response.CompanyDetailSearchResponseDto;
+import com.teamstep.stepbackend.domain.recruitment.application.dto.response.RecruitmentSummaryDto;
+import com.teamstep.stepbackend.domain.company.application.exception.CompanyNotFoundException;
+import com.teamstep.stepbackend.domain.company.application.repository.CompanyRepository;
+import com.teamstep.stepbackend.domain.company.entity.Company;
+import com.teamstep.stepbackend.domain.recruitment.application.repository.RecruitmentRepository;
+import com.teamstep.stepbackend.domain.recruitment.entity.Recruitment;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+
+@Service
+@RequiredArgsConstructor
+public class GetCompanyUseCase {
+
+    private final CompanyRepository companyRepository;
+    private final RecruitmentRepository recruitmentRepository;
+
+    @Transactional(readOnly = true)
+    public CompanyDetailSearchResponseDto getCompanyById(CompanyDetailSearchRequestDto companyId) {
+        Company company = companyRepository.findById(companyId.id())
+                .orElseThrow(() -> new CompanyNotFoundException("해당 회사가 존재하지 않습니다."));
+
+        List<Recruitment> recruitmentList = recruitmentRepository.findByCompany(companyId.id());
+        List<RecruitmentSummaryDto> recruitments = recruitmentList.stream()
+                .map(RecruitmentSummaryDto::from)
+                .toList();
+
+        return CompanyDetailSearchResponseDto.of(company, recruitments);
+    }
+}

@@ -1,0 +1,71 @@
+package com.teamstep.stepbackend.domain.recruitment.application.dto.response;
+
+import com.teamstep.stepbackend.domain.recruitment.entity.Recruitment;
+
+public record RecruitmentDetailSearchResponseDto(
+        String preferredQualifications,
+        String otherRequirement,
+        Boolean documentResume,
+        Boolean documentIntroduction,
+        Boolean documentStudentRecord,
+        String documentOther,
+        Long targetMale,
+        Long targetFemale,
+        String major,
+        String jobType,
+        String jobDepartment,
+        String jobDescription,
+        String workDays,
+        String workTime,
+        String nationalPension,
+        String healthInsurance,
+        String employmentInsurance,
+        String workersCompensation,
+        String internshipAllowanceType,
+        String internshipAllowanceAmount,
+        String salaryType,
+        String salaryAmount,
+        String bonus,
+        String conditionInternship,
+        String conditionConvertible,
+        String conditionMilitaryException,
+        String conditionWelfare,
+        String conditionTransportation,
+        String startDate,
+        String endDate
+) {
+    public static RecruitmentDetailSearchResponseDto from(Recruitment recruitment) {
+        return new RecruitmentDetailSearchResponseDto(
+                recruitment.getPreferredQualifications(),
+                recruitment.getOtherRequirement(),
+                recruitment.getDocumentResume(),
+                recruitment.getDocumentIntroduction(),
+                recruitment.getDocumentStudentRecord(),
+                recruitment.getDocumentOther(),
+                recruitment.getTargetMale(),
+                recruitment.getTargetFemale(),
+                recruitment.getMajor(),
+                recruitment.getJobType(),
+                recruitment.getJobDepartment(),
+                recruitment.getJobDescription(),
+                recruitment.getWorkDays(),
+                recruitment.getWorkTime(),
+                recruitment.getNationalPension(),
+                recruitment.getHealthInsurance(),
+                recruitment.getEmploymentInsurance(),
+                recruitment.getWorkersCompensation(),
+                recruitment.getInternshipAllowanceType(),
+                recruitment.getInternshipAllowanceAmount(),
+                recruitment.getSalaryType(),
+                recruitment.getSalaryAmount(),
+                recruitment.getBonus(),
+                recruitment.getConditionInternship(),
+                recruitment.getConditionConvertible(),
+                recruitment.getConditionMilitaryException(),
+                recruitment.getConditionWelfare(),
+                recruitment.getConditionTransportation(),
+                recruitment.getStartDate(),
+                recruitment.getEndDate()
+        );
+    }
+}
