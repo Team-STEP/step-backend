@@ -1,4 +1,4 @@
-package com.teamstep.stepbackend.domain.student.application;
+package com.teamstep.stepbackend.domain.student.application.repository;
 
 import com.teamstep.stepbackend.domain.student.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;

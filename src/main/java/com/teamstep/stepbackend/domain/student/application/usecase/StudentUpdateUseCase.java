@@ -1,5 +1,7 @@
-package com.teamstep.stepbackend.domain.student.application;
+package com.teamstep.stepbackend.domain.student.application.usecase;
 
+import com.teamstep.stepbackend.domain.student.application.dto.request.StudentUpdateRequest;
+import com.teamstep.stepbackend.domain.student.application.repository.StudentRepository;
 import com.teamstep.stepbackend.domain.student.entity.Student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

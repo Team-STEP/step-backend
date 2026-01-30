@@ -1,9 +1,9 @@
-package com.teamstep.stepbackend.domain.student.adapter;
+package com.teamstep.stepbackend.domain.student.adapter.controller;
 
-import com.teamstep.stepbackend.domain.student.application.StudentSearchResponse;
-import com.teamstep.stepbackend.domain.student.application.StudentSearchUseCase;
-import com.teamstep.stepbackend.domain.student.application.StudentUpdateRequest;
-import com.teamstep.stepbackend.domain.student.application.StudentUpdateUseCase;
+import com.teamstep.stepbackend.domain.student.application.dto.response.StudentSearchResponse;
+import com.teamstep.stepbackend.domain.student.application.usecase.StudentSearchUseCase;
+import com.teamstep.stepbackend.domain.student.application.dto.request.StudentUpdateRequest;
+import com.teamstep.stepbackend.domain.student.application.usecase.StudentUpdateUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

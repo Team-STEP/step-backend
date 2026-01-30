@@ -1,5 +1,7 @@
-package com.teamstep.stepbackend.domain.student.application;
+package com.teamstep.stepbackend.domain.student.application.usecase;
 
+import com.teamstep.stepbackend.domain.student.application.dto.response.StudentSearchResponse;
+import com.teamstep.stepbackend.domain.student.application.repository.StudentRepository;
 import com.teamstep.stepbackend.domain.student.entity.Student;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;

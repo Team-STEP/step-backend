@@ -1,4 +1,4 @@
-package com.teamstep.stepbackend.domain.student.application;
+package com.teamstep.stepbackend.domain.student.application.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
